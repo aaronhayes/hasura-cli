@@ -106,12 +106,12 @@
   "description": "A package that automatically installs and wraps Hasura CLI binary in isolated manner",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jjangga0214/hasura-cli.git"
+    "url": "https://github.com/aaronhayes/hasura-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/jjangga0214/hasura-cli/issues"
+    "url": "https://github.com/aaronhayes/hasura-cli/issues"
   },
-  "homepage": "https://github.com/jjangga0214/hasura-cli",
+  "homepage": "https://github.com/aaronhayes/hasura-cli",
   "author": {
     "name": "Gil B. Chan",
     "email": "bnbcmindnpass@gmail.com",
