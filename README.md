@@ -1,5 +1,8 @@
 # ![hasura-cli](./docs/assets/hasura-cli.svg)
 
+### Fork
+This is a fork from [jjangga0214](https://github.com/jjangga0214/hasura-cli), I maintain this repo to release new versions faster. I often release faster, but sometimes Jjangga0214 does. 
+
 An npm package that automatically installs and wraps **Hasura CLI** binary in isolated manner
 
 [![license](https://img.shields.io/badge/license-MIT-ff4081.svg?style=flat-square&labelColor=black)](./LICENSE)
@@ -31,23 +34,23 @@ Currently there are 2 npm tags (npm tags are different from versions), `latest` 
 Of course, you can install it globally,
 
 ```bash
-npm install --global hasura-cli[@tag|@version]
+npm install --global @aaronhayes/hasura-cli[@tag|@version]
 ```
 
 or in a project.
 
 ```bash
 # latest version from latest tag
-npm install --save-dev hasura-cli@latest
+npm install --save-dev @aaronhayes/hasura-cli@latest
 
 # latest version from beta tag
-npm install --save-dev hasura-cli@beta
+npm install --save-dev @aaronhayes/hasura-cli@beta
 
 # or specific version
-npm install --save-dev hasura-cli@1.0.0
+npm install --save-dev @aaronhayes/hasura-cli@1.0.0
 
 # latest version regardless of tag
-npm install --save-dev hasura-cli
+npm install --save-dev @aaronhayes/hasura-cli
 ```
 
 Then you will be able to run hasura command.
