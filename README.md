@@ -5,12 +5,15 @@ This is a fork from [jjangga0214](https://github.com/jjangga0214/hasura-cli), I 
 
 An npm package that automatically installs and wraps **Hasura CLI** binary in isolated manner
 
+[![npm version](https://img.shields.io/npm/v/hasura-cli?style=flat-square&labelColor=black&label=version)](https://www.npmjs.com/package/hasura-cli)
+[![npm beta version](https://img.shields.io/npm/v/hasura-cli/beta?style=flat-square&labelColor=black&color=ffd900&label=beta)](https://www.npmjs.com/package/hasura-cli)
+[![npm alpha version](https://img.shields.io/npm/v/hasura-cli/alpha?style=flat-square&labelColor=black&color=fedcba&&label=alpha)](https://www.npmjs.com/package/hasura-cli)
+[![npm download](https://img.shields.io/npm/dm/hasura-cli?style=flat-square&labelColor=black&label=npm%20download)](https://www.npmjs.com/package/hasura-cli)
+
 [![license](https://img.shields.io/badge/license-MIT-ff4081.svg?style=flat-square&labelColor=black)](./LICENSE)
 [![test](https://img.shields.io/badge/test-jest-7c4dff.svg?style=flat-square&labelColor=black)](./jest.config.js)
 [![code style:airbnb](https://img.shields.io/badge/code_style-airbnb-448aff.svg?style=flat-square&labelColor=black)](https://github.com/airbnb/javascript)
 [![code style:prettier](https://img.shields.io/badge/code_style-prettier-18ffff.svg?style=flat-square&labelColor=black)](https://prettier.io/)
-[![.nvmrc](https://img.shields.io/badge/.nvmrc-12-00e676.svg?style=flat-square&labelColor=black)](./.nvmrc)
-[![yarn:required](https://img.shields.io/badge/yarn-required-aeea00.svg?style=flat-square&labelColor=black)](https://yarnpkg.com/en/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-ffab00.svg?style=flat-square&labelColor=black)](https://conventionalcommits.org)
 [![Commitizen friendly](https://img.shields.io/badge/Commitizen-cz_conventional_changelog-dd2c00.svg?style=flat-square&labelColor=black)](http://commitizen.github.io/cz-cli/)
 ![pr welcome](https://img.shields.io/badge/PRs-welcome-09FF33.svg?style=flat-square&labelColor=black)
@@ -29,7 +32,7 @@ The [**Original Hasura CLI**](https://github.com/hasura/graphql-engine/tree/mast
 
 You can just simply install hasura-cli through npm or yarn. Note that this package follows version of the [**Original Hasura CLI**](https://github.com/hasura/graphql-engine/tree/master/cli). If you want to check its releases, go [here](https://github.com/hasura/graphql-engine/releases).
 
-Currently there are 2 npm tags (npm tags are different from versions), `latest` and `beta`. `latest` tag refers to Hasura's latest stable version(e.g. v1.1.1 as of writing), while `beta`, beta version(e.g. v1.2.0-beta.3 as of writing).
+Currently there are 3 npm tags (npm tags are different from versions), `latest`, `beta` and `alpha`. `latest` tag refers to Hasura's latest stable version(e.g. [![npm version](https://img.shields.io/npm/v/hasura-cli?style=flat-square&labelColor=black&label=version)](https://www.npmjs.com/package/hasura-cli)), while `beta` and `alpha`, respectively beta version(e.g. [![npm beta version](https://img.shields.io/npm/v/hasura-cli/beta?style=flat-square&labelColor=black&color=ffd900&label=beta)](https://www.npmjs.com/package/hasura-cli)) and alpha version(e.g. [![npm alpha version](https://img.shields.io/npm/v/hasura-cli/alpha?style=flat-square&labelColor=black&color=fedcba&&label=alpha)](https://www.npmjs.com/package/hasura-cli)).
 
 Of course, you can install it globally,
 
@@ -80,6 +83,19 @@ Or configure npm scripts on package.json in the way you want.
 Generally, it works on 64 bits architecture of any Linux, macOS, and Windows with node@>=8.
 
 ## Development (Contribution)
+
+### Quick PR for new version
+
+It's simple. Just update the `version` in [package.json](./package.json), then make a Pull Request. That's it!
+
+```jsonc
+{
+  "name": "hasura-cli",
+  "version": "1.3.0", // Patch this to "1.3.1-beta.1", for example.
+  "license": "MIT"
+  // ...
+}
+```
 
 ### Note
 
@@ -175,7 +191,7 @@ package.json exposes the command `hasura` as a symlink to the flie `hasura`. Onl
 }
 ```
 
-However, when publishing (`npm publish` on development environment) the package, the file `hasura` is just a dummy 'text' file, not a binary flie. The file will be replaced to a binary only when a client installs the package on Linux or MacOS. On windows, unlike linux and macOS, the file `hasura` is to be removed, and a new file `hasura.exe` will be created. `postinstall` lifecycle hook executes `dist/index.js`, which would install the platform-specfic binary.
+However, when publishing (`npm publish` on development environment) the package, the file `hasura` is just a dummy 'text' file, not a binary flie. The file will be replaced to a binary only when a client installs the package on Linux or macOS. On Windows, unlike Linux or macOS, the file `hasura` is to be removed, and a new file `hasura.exe` will be created. `postinstall` lifecycle hook executes `dist/index.js`, which would install the platform-specfic binary.
 
 [The binaries](https://github.com/hasura/graphql-engine/releases) are hosted on GitHub as release assets. `src/asset.ts` exposes functions of _"getting GitHub asset url"_ and _"downloading the asset from the url"_. `src/install.ts` exposes a function of _"composing them and handling how installation should be processed"_. `src/index.ts` uses the function to actually install the asset with some additional control.
 

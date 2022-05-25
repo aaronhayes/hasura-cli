@@ -19,9 +19,7 @@ export async function download({
   const dest = path.resolve(destDir, fileName)
   const writer = fs.createWriteStream(dest)
 
-  const res = await axios({
-    url,
-    method: 'GET',
+  const res = await axios.get(url, {
     responseType: 'stream',
     headers: {
       Accept: 'application/octet-stream',
@@ -43,6 +41,7 @@ export async function download({
 export async function getUrl(
   tag: string, // e.g. "v1.0.0-beta.6" or "v1.0.0-alpha29"
   platform: string = process.platform,
+  arch: string = process.arch, // REF: https://nodejs.org/api/process.html#processarch
 ): Promise<string> {
   const prefix =
     tag.slice(0, -1).endsWith('alpha0') && parseInt(tag.slice(-1), 10) < 5
@@ -57,9 +56,22 @@ export async function getUrl(
   //     * cli-hasura-linux-amd64
   //     * cli-hasura-darwin-amd64
   //     * cli-hasura-windows-amd64.exe
-  const asset = `${prefix}hasura-${
-    platform === 'win32' ? 'windows' : platform
-  }-amd64${platform === 'win32' ? '.exe' : ''}`
+  if (platform === 'win32') {
+    // eslint-disable-next-line no-param-reassign
+    platform = 'windows'
+  }
+  if (arch === 'arm64' && platform === 'windows') {
+    // Currently, Hasura CLI does not provide ARM build for Windows.
+    // ARM Windows should depend on emulation layer.
+    // eslint-disable-next-line no-param-reassign
+    arch = 'amd64'
+  } else if (arch !== 'arm64') {
+    // Currently, Hasura CLI only supoort either arm64 or amd64
+    // eslint-disable-next-line no-param-reassign
+    arch = 'amd64'
+  }
+  const ext = platform === 'windows' ? '.exe' : ''
+  const asset = `${prefix}hasura-${platform}-${arch}${ext}`
 
   return `https://github.com/hasura/graphql-engine/releases/download/${tag}/${asset}`
 }
